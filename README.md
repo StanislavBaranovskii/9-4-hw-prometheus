@@ -112,7 +112,29 @@ WantedBy=multi-user.target
 
 *Приложите скриншот конфига из интерфейса Prometheus вкладки Status > Configuration. Приложите скриншот из интерфейса Prometheus вкладки Status > Targets, чтобы было видно минимум два эндпоинта.*
 ```
+sudo nano /etc/prometheus/prometheus.yml #Содержимое файла ниже в блоке кода
+sudo systemctl restart prometheus
 ```
+Содержимое файла prometheus.yml
+```
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+
+rule_files:
+
+scrape_configs:
+  - job_name: "prometheus"
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9090', 'localhost:9100']
+```
+
 ![Скриншот конфига из интерфейса Prometheus вкладки Status > Configuration](https://github.com/StanislavBaranovskii/9-4-hw-prometheus/blob/main/img/9-4-3-1.png "Скриншот конфига из интерфейса Prometheus вкладки Status > Configuration")
 ![Скриншот конфига из интерфейса Prometheus вкладки Status > Configuration](https://github.com/StanislavBaranovskii/9-4-hw-prometheus/blob/main/img/9-4-3-2.png "Скриншот конфига из интерфейса Prometheus вкладки Status > Configuration")
 
